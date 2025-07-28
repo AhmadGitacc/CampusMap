@@ -12,11 +12,12 @@ const Header = ({ onSelectLocation, onReset }) => {
   };
 
   return (
-    <div className="sticky top-0 z-10 w-full p-4 shadow-lg bg-gradient-to-r from-purple-700 to-pink-600">
+    <div className="sticky top-0 z-10 w-full p-4 shadow-lg bg-gradient-to-r from-blue-500 to-orange-300">
       <div className="flex flex-col items-center justify-between gap-4 sm:flex-row sm:gap-6">
-        <h1 className="text-xl font-bold tracking-wide text-center text-white sm:text-left">
-          Campus Navigator
+        <h1 className="text-2xl font-extrabold tracking-widest text-white uppercase sm:text-3xl drop-shadow-lg">
+          <span className="text-yellow-300">Campus</span> <span className="text-white">Navigator</span>
         </h1>
+
 
         <div className="flex flex-col items-center w-full gap-2 sm:flex-row sm:w-auto">
           <input
