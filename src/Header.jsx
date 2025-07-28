@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { LOCATIONS } from './locations';
+import { useState } from "react";
+import { LOCATIONS } from "./locations";
 
-const Header = ({ onSelectLocation }) => {
+const Header = ({ onSelectLocation, onReset }) => {
   const [search, setSearch] = useState('');
 
   const handleSelect = (name) => {
@@ -12,28 +12,45 @@ const Header = ({ onSelectLocation }) => {
   };
 
   return (
-    <div className="w-full p-4 bg-white shadow-md flex items-center justify-between top-0 z-10 sticky">
-      <h1 className="text-lg font-semibold">Campus Navigator</h1>
-      <div className="flex items-center gap-2">
-        <input
-          type="text"
-          className="border px-2 py-1 rounded"
-          placeholder="Search location..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          list="location-options"
-        />
-        <datalist id="location-options">
-          {LOCATIONS.map((loc, index) => (
-            <option key={index} value={loc.name} />
-          ))}
-        </datalist>
-        <button
-          className="bg-blue-600 text-white px-3 py-1 rounded"
-          onClick={() => handleSelect(search)}
-        >
-          Go
-        </button>
+    <div className="sticky top-0 z-10 w-full p-4 shadow-lg bg-gradient-to-r from-purple-700 to-pink-600">
+      <div className="flex flex-col items-center justify-between gap-4 sm:flex-row sm:gap-6">
+        <h1 className="text-xl font-bold tracking-wide text-center text-white sm:text-left">
+          Campus Navigator
+        </h1>
+
+        <div className="flex flex-col items-center w-full gap-2 sm:flex-row sm:w-auto">
+          <input
+            type="text"
+            className="w-full px-3 py-2 text-sm placeholder-gray-700 border-none rounded-lg sm:w-60 focus:outline-none focus:ring-2 focus:ring-white"
+            placeholder="Search location..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            list="location-options"
+          />
+          <datalist id="location-options">
+            {LOCATIONS.map((loc, index) => (
+              <option key={index} value={loc.name} />
+            ))}
+          </datalist>
+
+          <div className="flex w-full gap-2 sm:w-auto">
+            <button
+              className="w-full px-4 py-2 font-semibold text-pink-700 transition-all duration-200 bg-white rounded-lg sm:w-auto hover:bg-pink-100"
+              onClick={() => handleSelect(search)}
+            >
+              Go
+            </button>
+            <button
+              className="w-full px-4 py-2 font-semibold text-white transition-all duration-200 bg-red-600 rounded-lg sm:w-auto hover:bg-red-700"
+              onClick={() => {
+                setSearch('');
+                onReset();
+              }}
+            >
+              Reset
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

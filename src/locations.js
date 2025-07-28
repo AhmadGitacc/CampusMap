@@ -24,7 +24,7 @@ export const LOCATIONS = [
     description: 'Hub for technology services and internet access.',
   },
   {
-    name: 'Student Affairs Block',
+    name: 'Student Admin Block',
     lat: 8.8433,
     lng: 7.9065,
     description: 'Administrative building for student-related services.',
@@ -33,7 +33,7 @@ export const LOCATIONS = [
     name: 'Old Library (Lecture Halls)',
     lat: 8.8425,
     lng: 7.9049,
-    description: 'On-campus housing for male students.',
+    description: 'Lecture halls and study spaces.',
   },
   {
     name: 'Hostel B (Female)',
