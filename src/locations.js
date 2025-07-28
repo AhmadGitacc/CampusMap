@@ -12,16 +12,16 @@ export const LOCATIONS = [
     description: 'Central academic library serving all faculties.',
   },
   {
-    name: 'Faculty of Law',
+    name: 'CR Block',
     lat: 8.8429,
     lng: 7.9062,
-    description: 'Lecture halls and offices for Law students.',
+    description: 'Lecture halls for students.',
   },
   {
     name: 'ICT Centre',
     lat: 8.8426,
     lng: 7.9059,
-    description: 'Hub for technology services and internet access.',
+    description: 'Hub for technology services and exams.',
   },
   {
     name: 'Student Admin Block',
