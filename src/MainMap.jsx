@@ -37,7 +37,6 @@ const FlyToLocation = ({ location }) => {
   return null;
 };
 
-// Component to handle "Locate Me" button logic
 const LocateMeControl = ({ onLocationFound }) => {
   const map = useMap();
 
@@ -63,7 +62,7 @@ const LocateMeControl = ({ onLocationFound }) => {
   return (
     <button
       onClick={handleClick}
-      className="absolute bottom-4 right-4 z-[1000] bg-white text-sm text-blue-700 font-semibold px-4 py-2 rounded-full shadow-lg hover:bg-blue-50"
+      className="absolute bottom-14 right-4 z-[1000] bg-white text-sm text-blue-700 font-semibold px-4 py-2 rounded-full shadow-lg hover:bg-blue-50"
     >
       Locate Me
     </button>
