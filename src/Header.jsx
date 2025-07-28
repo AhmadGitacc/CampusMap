@@ -12,17 +12,16 @@ const Header = ({ onSelectLocation, onReset }) => {
   };
 
   return (
-    <div className="sticky top-0 z-10 w-full p-4 shadow-lg bg-gradient-to-r from-blue-500 to-orange-300">
-      <div className="flex flex-col items-center justify-between gap-4 sm:flex-row sm:gap-6">
-        <h1 className="text-2xl font-extrabold tracking-widest text-white uppercase sm:text-3xl drop-shadow-lg">
-          <span className="text-yellow-300">Campus</span> <span className="text-white">Navigator</span>
+    <div className="sticky top-0 z-10 w-full px-3 py-2 shadow-md bg-gradient-to-r from-slate-800 to-indigo-700 sm:px-6 sm:py-4">
+      <div className="flex flex-col items-center justify-between gap-3 sm:flex-row sm:gap-6">
+        <h1 className="text-lg font-extrabold tracking-wider text-white uppercase sm:text-2xl drop-shadow-md">
+          <span className="text-teal-300">Campus</span> <span className="text-white">Navigator</span>
         </h1>
-
 
         <div className="flex flex-col items-center w-full gap-2 sm:flex-row sm:w-auto">
           <input
             type="text"
-            className="w-full px-3 py-2 text-sm placeholder-gray-700 border-none rounded-lg sm:w-60 focus:outline-none focus:ring-2 focus:ring-white"
+            className="w-full px-3 py-1.5 text-sm text-gray-900 placeholder-gray-500 rounded-md sm:w-52 focus:outline-none focus:ring-2 focus:ring-teal-300"
             placeholder="Search location..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -36,13 +35,13 @@ const Header = ({ onSelectLocation, onReset }) => {
 
           <div className="flex w-full gap-2 sm:w-auto">
             <button
-              className="w-full px-4 py-2 font-semibold text-pink-700 transition-all duration-200 bg-white rounded-lg sm:w-auto hover:bg-pink-100"
+              className="w-full px-3 py-1.5 text-sm font-semibold text-indigo-700 bg-white rounded-md hover:bg-indigo-100 sm:w-auto"
               onClick={() => handleSelect(search)}
             >
               Go
             </button>
             <button
-              className="w-full px-4 py-2 font-semibold text-white transition-all duration-200 bg-red-600 rounded-lg sm:w-auto hover:bg-red-700"
+              className="w-full px-3 py-1.5 text-sm font-semibold text-white bg-rose-600 rounded-md hover:bg-rose-700 sm:w-auto"
               onClick={() => {
                 setSearch('');
                 onReset();

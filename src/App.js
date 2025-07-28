@@ -8,19 +8,25 @@ export default function App() {
 
   const handleReset = () => {
     setSelectedLocation(null);
-    setResetTrigger(true);
+    setResetTrigger(prev => !prev); // toggle the reset key
   };
+
 
   useEffect(() => {
     if (resetTrigger) {
-      setResetTrigger(false);
+      setTimeout(() => {
+        setResetTrigger(false);
+      }, 1000);
     }
   }, [resetTrigger]);
 
   return (
     <div className="w-full h-full">
       <Header onSelectLocation={setSelectedLocation} onReset={handleReset} />
-      <MainMap selectedLocation={selectedLocation} resetTrigger={resetTrigger} />
+      <MainMap
+        key={resetTrigger ? 'reset' : 'normal'}
+        selectedLocation={selectedLocation}
+      />
     </div>
   );
 }

@@ -32,7 +32,7 @@ const FlyToLocation = ({ location }) => {
   return null;
 };
 
-const MainMap = ({ selectedLocation, resetTrigger }) => {
+const MainMap = ({ selectedLocation }) => {
   const markerRefs = useRef([]);
   const mapRef = useRef();
 
@@ -47,12 +47,6 @@ const MainMap = ({ selectedLocation, resetTrigger }) => {
       }
     }
   }, [selectedLocation]);
-
-  useEffect(() => {
-    if (resetTrigger && mapRef.current) {
-      mapRef.current.flyTo([8.8450, 7.9076], 17);
-    }
-  }, [resetTrigger])
 
   return (
     <MapContainer
