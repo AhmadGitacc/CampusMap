@@ -3,11 +3,14 @@ import 'leaflet/dist/leaflet.css';
 import { useRef, useEffect, useState } from 'react';
 import L from 'leaflet';
 import { LOCATIONS } from './locations';
+import 'leaflet-routing-machine';
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
+// Default marker icon setup
 const DefaultIcon = L.icon({
   iconUrl: markerIcon,
   iconRetinaUrl: markerIcon2x,
@@ -20,13 +23,12 @@ const DefaultIcon = L.icon({
 
 const userIcon = new L.Icon({
   iconUrl: 'https://cdn-icons-png.flaticon.com/512/5216/5216434.png',
-  iconSize: [52, 52],
+  iconSize: [48, 48],
   iconAnchor: [16, 32],
 });
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
-// Fly to selected location when chosen
 const FlyToLocation = ({ location }) => {
   const map = useMap();
   useEffect(() => {
@@ -69,8 +71,57 @@ const LocateMeControl = ({ onLocationFound }) => {
   );
 };
 
+const DirectionsButton = ({ userLocation, destination }) => {
+  const map = useMap();
+
+  const handleDirections = () => {
+    if (!userLocation || !destination) {
+      alert("User location or destination is missing.");
+      console.log("userLocation:", userLocation, "destination:", destination);
+      return;
+    }
+
+    if (!map) {
+      console.log("Map is not ready.");
+      return;
+    }
+
+    // Remove previous routing if any
+    if (map._routingControl) {
+      map.removeControl(map._routingControl);
+    }
+
+    const routingControl = L.Routing.control({
+      waypoints: [
+        L.latLng(userLocation.lat, userLocation.lng),
+        L.latLng(destination.lat, destination.lng),
+      ],
+      lineOptions: {
+        styles: [{ color: 'blue', weight: 4 }],
+      },
+      createMarker: () => null,
+      routeWhileDragging: false,
+      draggableWaypoints: false,
+      addWaypoints: false,
+      show: false,
+    }).addTo(map);
+
+    map._routingControl = routingControl;
+  };
+
+  return (
+    <button
+      onClick={handleDirections}
+      className="absolute bottom-28 right-4 z-[1000] bg-white text-sm text-green-700 font-semibold px-4 py-2 rounded-full shadow-lg hover:bg-green-50"
+    >
+      Get Directions
+    </button>
+  );
+};
+
 const MainMap = ({ selectedLocation }) => {
   const markerRefs = useRef([]);
+  const mapRef = useRef(); // <-- NEW
   const [userLocation, setUserLocation] = useState(null);
 
   useEffect(() => {
@@ -88,7 +139,7 @@ const MainMap = ({ selectedLocation }) => {
       <MapContainer
         center={[8.845, 7.9076]}
         zoom={17}
-        className="h-full w-full"
+        className="w-full h-full"
       >
         <TileLayer
           url="https://api.maptiler.com/maps/topo/{z}/{x}/{y}.png?key=hi6clt4EqHzaoWHzZ3qc"
@@ -116,8 +167,12 @@ const MainMap = ({ selectedLocation }) => {
           </Marker>
         )}
 
-        {/* Locate Me Button */}
         <LocateMeControl onLocationFound={setUserLocation} />
+
+        <DirectionsButton
+          userLocation={userLocation}
+          destination={selectedLocation}
+        />
       </MapContainer>
     </div>
   );
